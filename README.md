@@ -16,7 +16,7 @@
 ### Association
 
 * has_many :items
-* has_one :record
+* has_many :records
 
 ## items テーブル
 
@@ -37,7 +37,7 @@
 - belongs_to :user
 - has_one :record
 
-## record テーブル
+## records テーブル
 
 | Column    | Type       | Options                        |
 | --------- | ---------- | ------------------------------ |
@@ -46,6 +46,7 @@
 
 ### Association
 
+- belongs_to :user
 - belongs_to :item
 - has_one :address
 
@@ -54,11 +55,11 @@
 | Column                  | Type         | Options     |
 | ------------------      | ------       | ----------- |
 | post_code               | string       | null: false |
-| delivery_area_id        | string       | null: false |
+| delivery_area_id        | integer      | null: false |
 | delivery_city           | string       | null: false |
-| delivery_number         | integer      | null: false |
+| delivery_number         | string       | null: false |
 | building_name           | string       |             |
-| phone_number            | integer      | null: false |
+| phone_number            | string       | null: false |
 | record                  | references   | null: false, foreign_key: true |
 
 ### Association
