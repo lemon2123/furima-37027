@@ -62,6 +62,16 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include('Price is invalid')
       end
+      it '販売価格が全角数字では保存できないこと' do
+        @item.price = '３００'
+        @item.valid?
+        expect(@item.errors.full_messages).to include('Price is invalid')
+      end
+      it 'userが紐付いていないと保存できないこと' do
+        @item.user = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include("User must exist")
+      end
     end
   end
 end
