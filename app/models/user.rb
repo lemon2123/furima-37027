@@ -19,4 +19,6 @@ class User < ApplicationRecord
   validates :birthday, presence: true
   validates_format_of :password, with: /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i, message: '英字と数字の両方を含めて設定してください'
 
+  has_many :items
+
 end
