@@ -1,9 +1,6 @@
 class RecordAddress
   include ActiveModel::Model
   attr_accessor :post_code, :delivery_area_id, :delivery_city, :delivery_number, :building_name, :phone_number, :user_id, :item_id
-  #:user_idが二ついるのか、いらないのか？
-  # そもそもRecordのカラムが必要なのか？
-  #いったん、:user_id, :item_idのみを記述して実装を進めてみる。エラーがでたら試してみる。
 
   with_options presence: true do
     validates :user_id
