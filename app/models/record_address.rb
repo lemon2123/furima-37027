@@ -6,6 +6,7 @@ class RecordAddress
   #いったん、:user_id, :item_idのみを記述して実装を進めてみる。エラーがでたら試してみる。
 
   with_options presence: true do
+    validates :user_id
     validates :post_code, format: {with: /\A[0-9]{3}-[0-9]{4}\z/, message: "is invalid. Include hyphen(-)"}
     validates :phone_number, format: { with: /\A\d{10,11}\z/, message: '10桁か11桁の数字を使用してください' }
   end
