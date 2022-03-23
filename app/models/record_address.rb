@@ -1,6 +1,6 @@
 class RecordAddress
   include ActiveModel::Model
-  attr_accessor :post_code, :delivery_area_id, :delivery_city, :delivery_number, :building_name, :phone_number, :user_id, :item_id
+  attr_accessor :post_code, :delivery_area_id, :delivery_city, :delivery_number, :building_name, :phone_number, :user_id, :item_id, :token, :price
 
   with_options presence: true do
     validates :user_id
@@ -11,6 +11,7 @@ class RecordAddress
   validates :delivery_area_id, numericality: { other_than: 1, message: "can't be blank" }
   validates :delivery_city, presence: true
   validates :delivery_number, presence: true
+  validates :token, presence: true
 
   def save
     record = Record.create(user_id: user_id, item_id: item_id)
