@@ -56,8 +56,6 @@ class ItemsController < ApplicationController
   end
 
   def edit_limit
-    if @item.record.present?
-      redirect_to root_path
-    end
+    redirect_to root_path if @item.record.present?
   end
 end

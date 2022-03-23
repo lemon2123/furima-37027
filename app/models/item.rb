@@ -20,7 +20,6 @@ class Item < ApplicationRecord
   belongs_to :user
   has_one :record
 
-
   validates :image, presence: true
   validates :name, presence: true
   validates :explanation, presence: true
