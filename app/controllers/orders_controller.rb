@@ -1,4 +1,7 @@
 class OrdersController < ApplicationController
+  before_action :contributor_confirmation, only: [:index, :create]
+  before_action :authenticate_user!, only: [:index, :create]
+  before_action :buy_confirmation, only: [:index, :create]
 
   def index
     @record_address = RecordAddress.new
@@ -30,6 +33,20 @@ class OrdersController < ApplicationController
       card: order_params[:token],
       currency: 'jpy'
     )
+  end
+
+  def contributor_confirmation
+    @item = Item.find(params[:item_id])
+    if current_user == @item.user
+      redirect_to root_path 
+    end
+  end
+
+  def buy_confirmation
+    @item = Item.find(params[:item_id])
+    if @item.record.present? 
+      redirect_to root_path
+    end
   end
 
 end
