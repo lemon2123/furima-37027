@@ -2,6 +2,7 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :edit, :destroy]
   before_action :set_item, only: [:show, :edit, :update, :destroy]
   before_action :contributor_confirmation, only: [:edit, :destroy]
+  before_action :edit_limit, only: [:edit]
 
   def index
     @items = Item.order('created_at DESC')
@@ -52,5 +53,9 @@ class ItemsController < ApplicationController
 
   def contributor_confirmation
     redirect_to root_path unless current_user == @item.user
+  end
+
+  def edit_limit
+    redirect_to root_path if @item.record.present?
   end
 end
