@@ -57,17 +57,17 @@ RSpec.describe RecordAddress, type: :model do
       it '電話番号が9桁以下だと購入できないこと' do
         @record_address.phone_number = '090123456'
         @record_address.valid?
-        expect(@record_address.errors.full_messages).to include("Phone number 10桁か11桁の数字を使用してください")
+        expect(@record_address.errors.full_messages).to include("Phone number 10桁か11桁の半角数字を使用してください")
       end
       it '電話番号が12桁以上だと購入できないこと' do
         @record_address.phone_number = '090123456789'
         @record_address.valid?
-        expect(@record_address.errors.full_messages).to include("Phone number 10桁か11桁の数字を使用してください")
+        expect(@record_address.errors.full_messages).to include("Phone number 10桁か11桁の半角数字を使用してください")
       end
       it '電話番号に全角数字が含まれている場合、購入できないこと' do
         @record_address.phone_number = '０９０１２３４５６７８'
         @record_address.valid?
-        expect(@record_address.errors.full_messages).to include("Phone number 10桁か11桁の数字を使用してください")
+        expect(@record_address.errors.full_messages).to include("Phone number 10桁か11桁の半角数字を使用してください")
       end
       it 'userが紐付いていないと購入できないこと' do
         @record_address.user_id = nil
