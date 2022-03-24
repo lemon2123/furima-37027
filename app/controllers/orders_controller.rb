@@ -1,16 +1,16 @@
 class OrdersController < ApplicationController
-  before_action :contributor_confirmation, only: [:index, :create]
   before_action :authenticate_user!, only: [:index, :create]
+  before_action :set_orders, only: [:index, :create]
+  before_action :contributor_confirmation, only: [:index, :create]
   before_action :buy_confirmation, only: [:index, :create]
+
 
   def index
     @record_address = RecordAddress.new
-    @item = Item.find(params[:item_id])
   end
 
   def create
     @record_address = RecordAddress.new(order_params)
-    @item = Item.find(params[:item_id])
     if @record_address.valid?
       pay_item
       @record_address.save
@@ -21,6 +21,10 @@ class OrdersController < ApplicationController
   end
 
   private
+
+  def set_orders
+    @item = Item.find(params[:item_id])
+  end
 
   def order_params
     params.require(:record_address).permit(:post_code, :delivery_area_id, :delivery_city, :delivery_number, :building_name, :phone_number).merge(
@@ -38,12 +42,10 @@ class OrdersController < ApplicationController
   end
 
   def contributor_confirmation
-    @item = Item.find(params[:item_id])
     redirect_to root_path if current_user == @item.user
   end
 
   def buy_confirmation
-    @item = Item.find(params[:item_id])
     redirect_to root_path if @item.record.present?
   end
 end
