@@ -9,3 +9,4 @@ window.addEventListener('load', function(){
     profitInput.innerHTML = (Math.floor(inputValue - addTaxDom.innerHTML));
   })
   });
+  
